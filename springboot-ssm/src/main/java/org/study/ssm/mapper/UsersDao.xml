@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.study.ssm.mapper.UsersDao">
+  <resultMap id="BaseResultMap" type="org.study.ssm.domain.Users">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="login" jdbcType="VARCHAR" property="login" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="crypted_password" jdbcType="VARCHAR" property="cryptedPassword" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="active" jdbcType="BIT" property="active" />
+    <result column="created_at" jdbcType="BIGINT" property="createdAt" />
+    <result column="updated_at" jdbcType="BIGINT" property="updatedAt" />
+    <result column="scm_accounts" jdbcType="VARCHAR" property="scmAccounts" />
+    <result column="external_login" jdbcType="VARCHAR" property="externalLogin" />
+    <result column="external_identity_provider" jdbcType="VARCHAR" property="externalIdentityProvider" />
+    <result column="user_local" jdbcType="BIT" property="userLocal" />
+    <result column="is_root" jdbcType="BIT" property="isRoot" />
+    <result column="onboarded" jdbcType="BIT" property="onboarded" />
+    <result column="homepage_type" jdbcType="VARCHAR" property="homepageType" />
+    <result column="homepage_parameter" jdbcType="VARCHAR" property="homepageParameter" />
+    <result column="hash_method" jdbcType="VARCHAR" property="hashMethod" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="external_id" jdbcType="VARCHAR" property="externalId" />
+    <result column="organization_uuid" jdbcType="VARCHAR" property="organizationUuid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `login`, `name`, email, crypted_password, salt, active, created_at, updated_at, 
+    scm_accounts, external_login, external_identity_provider, user_local, is_root, onboarded, 
+    homepage_type, homepage_parameter, hash_method, uuid, external_id, organization_uuid
+  </sql>
+  <select id="selectByExample" parameterType="org.study.ssm.domain.UsersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.study.ssm.domain.UsersExample">
+    delete from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.study.ssm.domain.Users" useGeneratedKeys="true">
+    insert into users (`login`, `name`, email, 
+      crypted_password, salt, active, 
+      created_at, updated_at, scm_accounts, 
+      external_login, external_identity_provider, 
+      user_local, is_root, onboarded, homepage_type, 
+      homepage_parameter, hash_method, uuid, 
+      external_id, organization_uuid)
+    values (#{login,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{cryptedPassword,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{active,jdbcType=BIT}, 
+      #{createdAt,jdbcType=BIGINT}, #{updatedAt,jdbcType=BIGINT}, #{scmAccounts,jdbcType=VARCHAR}, 
+      #{externalLogin,jdbcType=VARCHAR}, #{externalIdentityProvider,jdbcType=VARCHAR}, 
+      #{userLocal,jdbcType=BIT}, #{isRoot,jdbcType=BIT}, #{onboarded,jdbcType=BIT}, #{homepageType,jdbcType=VARCHAR}, 
+      #{homepageParameter,jdbcType=VARCHAR}, #{hashMethod,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, 
+      #{externalId,jdbcType=VARCHAR}, #{organizationUuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.study.ssm.domain.Users" useGeneratedKeys="true">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="login != null">
+        `login`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="cryptedPassword != null">
+        crypted_password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="scmAccounts != null">
+        scm_accounts,
+      </if>
+      <if test="externalLogin != null">
+        external_login,
+      </if>
+      <if test="externalIdentityProvider != null">
+        external_identity_provider,
+      </if>
+      <if test="userLocal != null">
+        user_local,
+      </if>
+      <if test="isRoot != null">
+        is_root,
+      </if>
+      <if test="onboarded != null">
+        onboarded,
+      </if>
+      <if test="homepageType != null">
+        homepage_type,
+      </if>
+      <if test="homepageParameter != null">
+        homepage_parameter,
+      </if>
+      <if test="hashMethod != null">
+        hash_method,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="externalId != null">
+        external_id,
+      </if>
+      <if test="organizationUuid != null">
+        organization_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="login != null">
+        #{login,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="cryptedPassword != null">
+        #{cryptedPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=BIGINT},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=BIGINT},
+      </if>
+      <if test="scmAccounts != null">
+        #{scmAccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="externalLogin != null">
+        #{externalLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="externalIdentityProvider != null">
+        #{externalIdentityProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="userLocal != null">
+        #{userLocal,jdbcType=BIT},
+      </if>
+      <if test="isRoot != null">
+        #{isRoot,jdbcType=BIT},
+      </if>
+      <if test="onboarded != null">
+        #{onboarded,jdbcType=BIT},
+      </if>
+      <if test="homepageType != null">
+        #{homepageType,jdbcType=VARCHAR},
+      </if>
+      <if test="homepageParameter != null">
+        #{homepageParameter,jdbcType=VARCHAR},
+      </if>
+      <if test="hashMethod != null">
+        #{hashMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="externalId != null">
+        #{externalId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationUuid != null">
+        #{organizationUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.study.ssm.domain.UsersExample" resultType="java.lang.Long">
+    select count(*) from users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update users
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.login != null">
+        `login` = #{record.login,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cryptedPassword != null">
+        crypted_password = #{record.cryptedPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null">
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.active != null">
+        active = #{record.active,jdbcType=BIT},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.scmAccounts != null">
+        scm_accounts = #{record.scmAccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalLogin != null">
+        external_login = #{record.externalLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalIdentityProvider != null">
+        external_identity_provider = #{record.externalIdentityProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLocal != null">
+        user_local = #{record.userLocal,jdbcType=BIT},
+      </if>
+      <if test="record.isRoot != null">
+        is_root = #{record.isRoot,jdbcType=BIT},
+      </if>
+      <if test="record.onboarded != null">
+        onboarded = #{record.onboarded,jdbcType=BIT},
+      </if>
+      <if test="record.homepageType != null">
+        homepage_type = #{record.homepageType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homepageParameter != null">
+        homepage_parameter = #{record.homepageParameter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hashMethod != null">
+        hash_method = #{record.hashMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.externalId != null">
+        external_id = #{record.externalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationUuid != null">
+        organization_uuid = #{record.organizationUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update users
+    set id = #{record.id,jdbcType=INTEGER},
+      `login` = #{record.login,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      crypted_password = #{record.cryptedPassword,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR},
+      active = #{record.active,jdbcType=BIT},
+      created_at = #{record.createdAt,jdbcType=BIGINT},
+      updated_at = #{record.updatedAt,jdbcType=BIGINT},
+      scm_accounts = #{record.scmAccounts,jdbcType=VARCHAR},
+      external_login = #{record.externalLogin,jdbcType=VARCHAR},
+      external_identity_provider = #{record.externalIdentityProvider,jdbcType=VARCHAR},
+      user_local = #{record.userLocal,jdbcType=BIT},
+      is_root = #{record.isRoot,jdbcType=BIT},
+      onboarded = #{record.onboarded,jdbcType=BIT},
+      homepage_type = #{record.homepageType,jdbcType=VARCHAR},
+      homepage_parameter = #{record.homepageParameter,jdbcType=VARCHAR},
+      hash_method = #{record.hashMethod,jdbcType=VARCHAR},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      external_id = #{record.externalId,jdbcType=VARCHAR},
+      organization_uuid = #{record.organizationUuid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.study.ssm.domain.Users">
+    update users
+    <set>
+      <if test="login != null">
+        `login` = #{login,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="cryptedPassword != null">
+        crypted_password = #{cryptedPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=BIGINT},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=BIGINT},
+      </if>
+      <if test="scmAccounts != null">
+        scm_accounts = #{scmAccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="externalLogin != null">
+        external_login = #{externalLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="externalIdentityProvider != null">
+        external_identity_provider = #{externalIdentityProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="userLocal != null">
+        user_local = #{userLocal,jdbcType=BIT},
+      </if>
+      <if test="isRoot != null">
+        is_root = #{isRoot,jdbcType=BIT},
+      </if>
+      <if test="onboarded != null">
+        onboarded = #{onboarded,jdbcType=BIT},
+      </if>
+      <if test="homepageType != null">
+        homepage_type = #{homepageType,jdbcType=VARCHAR},
+      </if>
+      <if test="homepageParameter != null">
+        homepage_parameter = #{homepageParameter,jdbcType=VARCHAR},
+      </if>
+      <if test="hashMethod != null">
+        hash_method = #{hashMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="externalId != null">
+        external_id = #{externalId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationUuid != null">
+        organization_uuid = #{organizationUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.study.ssm.domain.Users">
+    update users
+    set `login` = #{login,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      crypted_password = #{cryptedPassword,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      active = #{active,jdbcType=BIT},
+      created_at = #{createdAt,jdbcType=BIGINT},
+      updated_at = #{updatedAt,jdbcType=BIGINT},
+      scm_accounts = #{scmAccounts,jdbcType=VARCHAR},
+      external_login = #{externalLogin,jdbcType=VARCHAR},
+      external_identity_provider = #{externalIdentityProvider,jdbcType=VARCHAR},
+      user_local = #{userLocal,jdbcType=BIT},
+      is_root = #{isRoot,jdbcType=BIT},
+      onboarded = #{onboarded,jdbcType=BIT},
+      homepage_type = #{homepageType,jdbcType=VARCHAR},
+      homepage_parameter = #{homepageParameter,jdbcType=VARCHAR},
+      hash_method = #{hashMethod,jdbcType=VARCHAR},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      external_id = #{externalId,jdbcType=VARCHAR},
+      organization_uuid = #{organizationUuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

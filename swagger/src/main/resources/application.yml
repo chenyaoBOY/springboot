@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  tomcat:
+    accept-count: 0 #线程满了放入队列的最大数量
+    threads:
+      max: 5
+      min-spare: 5 # Tomcat启动以后就创建的线程
+    max-connections: 2000
+    connection-timeout: 1000
+

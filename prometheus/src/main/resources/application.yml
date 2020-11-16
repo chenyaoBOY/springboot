@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: springboot_prometheus
+management:
+  metrics:
+    tags:
+      map:
+        application:${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: '*'
