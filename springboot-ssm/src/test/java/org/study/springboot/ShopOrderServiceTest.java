@@ -2,15 +2,10 @@ package org.study.springboot;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.study.ssm.SpringbootSSM;
-import org.study.ssm.domain.ShopOrder;
-import org.study.ssm.mapper.ShopOrderMapper;
-import org.study.ssm.service.ShopOrderService;
+import org.study.ssm.standard.domain.ShopOrder;
+import org.study.ssm.standard.mapper.ShopOrderMapper;
+import org.study.ssm.standard.service.ShopOrderService;
 
 import java.util.Arrays;
 

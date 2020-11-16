@@ -2,8 +2,8 @@ package org.study.springboot;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.study.ssm.domain.GprsReconciliationChannelBill;
-import org.study.ssm.mapper.GPRSMapper;
+import org.study.ssm.standard.domain.GprsReconciliationChannelBill;
+import org.study.ssm.standard.mapper.GPRSMapper;
 
 /**
  * @author chenyao

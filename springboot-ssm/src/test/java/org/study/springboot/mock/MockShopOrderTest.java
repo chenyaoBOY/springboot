@@ -1,13 +1,6 @@
 package org.study.springboot.mock;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.study.springboot.SpringbootTestBase;
-import org.study.ssm.mapper.ShopOrderMapper;
-import org.study.ssm.service.ShopOrderService;
 
 import java.util.List;
 

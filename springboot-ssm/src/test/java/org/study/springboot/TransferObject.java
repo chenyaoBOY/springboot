@@ -1,6 +1,6 @@
 package org.study.springboot;
 
-import org.study.ssm.domain.GprsReconciliationChannelBill;
+import org.study.ssm.standard.domain.GprsReconciliationChannelBill;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
