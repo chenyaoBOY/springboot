@@ -20,7 +20,7 @@ public class DatasourceConfig {
         ds.setUsername("root");
         ds.setPassword("root");
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/local?characterEncoding=utf-8");
+        ds.setUrl("jdbc:mysql://localhost:3306/local?characterEncoding=utf-8&useSSL=false");
         ds.setTestOnBorrow(false);
         ds.setTestOnReturn(false);
         ds.setTestWhileIdle(false);

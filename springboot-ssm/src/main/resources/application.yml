@@ -1,2 +1,3 @@
-
-
+logging:
+  level:
+#    org.study.ssm.druid.mapper.*: debug
