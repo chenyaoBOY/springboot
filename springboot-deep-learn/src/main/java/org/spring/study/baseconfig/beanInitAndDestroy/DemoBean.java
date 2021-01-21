@@ -1,15 +1,17 @@
 package org.spring.study.baseconfig.beanInitAndDestroy;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DemoBean {
 
     public void init(){
-        System.out.println("demoBean初始化开始");
+        log.info("demoBean初始化开始");
     }
     public void hello(){
-        System.out.println("hello world! ");
+        log.info("hello world! ");
     }
     public void destroy(){
-        System.out.println("demoBean结束生命周期");
+        log.info("demoBean结束生命周期");
     }
 }

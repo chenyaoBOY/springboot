@@ -1,5 +1,6 @@
 package org.springboot.study.application;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
  * 如果有多个ApplicationRunner实现类 则可以使用 @Order注解 或者 实现Ordered接口
  */
 @Component
+@Slf4j
 public class BeforeSpringStart implements ApplicationRunner, Ordered {
     @Value("${database.name}")
     private String name;
@@ -23,7 +25,7 @@ public class BeforeSpringStart implements ApplicationRunner, Ordered {
     private String version;
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("BeforeSpringStart 是否在main方法结束前调用 application-mysql.yml配置读取为："+name+version);
+        log.info("BeforeSpringStart 是否在main方法结束前调用 application-mysql.yml配置读取为："+name+version);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.springboot.study.application;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.availability.AvailabilityChangeEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
  * @description
  */
 @Component
+@Slf4j
 public class ReadinessStateExporter {
 
     /**
@@ -22,16 +24,16 @@ public class ReadinessStateExporter {
     public void onStateChange(AvailabilityChangeEvent event){
         switch (event.getState().toString()){
             case "CORRECT":
-                System.out.println("当前容器状态:CORRECT 正确启动 time:"+System.currentTimeMillis());
+                log.info("当前容器状态:CORRECT 正确启动 time:"+System.currentTimeMillis());
                 break;
             case "BROKEN":
-                System.out.println("当前容器状态:BROKEN 容器已死亡");
+                log.info("当前容器状态:BROKEN 容器已死亡");
                 break;
             case "REFUSING_TRAFFIC":
-                System.out.println("当前容器状态:REFUSING_TRAFFIC 拒绝流量");
+                log.info("当前容器状态:REFUSING_TRAFFIC 拒绝流量");
                 break;
             case "ACCEPTING_TRAFFIC":
-                System.out.println("当前容器状态:ACCEPTING_TRAFFIC 可以接受流量 time:"+System.currentTimeMillis());
+                log.info("当前容器状态:ACCEPTING_TRAFFIC 可以接受流量 time:"+System.currentTimeMillis());
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package org.springboot.study.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springboot.study.entity.UserChina;
 import org.springboot.study.config.value.MapListConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Map;
  */
 @RestController
 @Component
+@Slf4j
 public class ConfigReadController {
     @Autowired
     private MapListConfig mapConfig;
@@ -26,16 +28,16 @@ public class ConfigReadController {
     @GetMapping("/map")
     public String getMapConfig(){
         for (Map.Entry<String, String> entry : mapConfig.getMap().entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
+            log.info(entry.getKey());
+            log.info(entry.getValue());
         }
         for (String s : mapConfig.getList()) {
-            System.out.println(s);
+            log.info(s);
         }
         return "ok";
     }
     @PostConstruct
     public void init(){
-        System.out.println("controller初始化完成");
+        log.info("controller初始化完成");
     }
 }

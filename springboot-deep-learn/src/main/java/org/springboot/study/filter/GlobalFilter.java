@@ -1,5 +1,6 @@
 package org.springboot.study.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -10,28 +11,28 @@ import java.io.IOException;
 
 @Component
 @Order(100)
+@Slf4j
 public class GlobalFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("filter初始化");
+        log.info("filter初始化");
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        System.out.println("GlobalFilter过滤器开始工作");
+        log.info("GlobalFilter过滤器开始工作");
         HttpServletResponse response = (HttpServletResponse)res;
         response.addHeader("Header-Global","made in GlobalFilter");
         chain.doFilter(req,res);
-        System.out.println("GlobalFilter过滤器又来了");
+        log.info("GlobalFilter过滤器又来了");
     }
 
     @Override
     public void destroy() {
-        System.out.println("过滤器挂了");
+        log.info("过滤器挂了");
     }
 
     public static void main(String[] args) {
         Class<?>[] interfaces = GlobalFilter.class.getInterfaces();
-        System.out.println();
     }
 }

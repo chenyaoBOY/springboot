@@ -1,5 +1,6 @@
 package org.springboot.study.application;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.Ordered;
@@ -17,9 +18,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(0)
+@Slf4j
 public class BeforeSpringStart2 implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("BeforeSpringStart2 是否在main方法结束前调用");
+        log.info("BeforeSpringStart2 是否在main方法结束前调用");
     }
 }

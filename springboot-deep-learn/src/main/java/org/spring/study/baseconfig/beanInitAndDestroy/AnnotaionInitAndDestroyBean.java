@@ -1,20 +1,23 @@
 package org.spring.study.baseconfig.beanInitAndDestroy;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+@Slf4j
 public class AnnotaionInitAndDestroyBean {
 
     @PostConstruct
     public void init(){
-        System.out.println("AnnotaionInitAndDestroyBean初始化开始");
+        log.info("AnnotaionInitAndDestroyBean初始化开始");
     }
     public void hello(){
-        System.out.println("hello world! ");
+        log.info("hello world! ");
     }
 
     @PreDestroy
     public void destroy(){
-        System.out.println("AnnotaionInitAndDestroyBean结束生命周期");
+        log.info("AnnotaionInitAndDestroyBean结束生命周期");
     }
 }

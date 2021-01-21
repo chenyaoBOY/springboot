@@ -37,3 +37,6 @@ logging:
       hibernate: error
       springframework:
         web: debug
+      springboot:
+        study: debug
+

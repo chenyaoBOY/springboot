@@ -1,5 +1,6 @@
 package org.springboot.study;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
  */
 @SpringBootApplication
 @ConfigurationPropertiesScan
+@Slf4j
 public class SpringbootApp {
 
     /**
@@ -25,6 +27,6 @@ public class SpringbootApp {
      */
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApp.class,args);
-        System.out.println("springboot完全启动成功 main方法结束");
+        log.info("springboot完全启动成功 main方法结束");
     }
 }

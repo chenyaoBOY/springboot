@@ -33,13 +33,13 @@ public class ScheduleAnnotationTaskConfig  {
         taskScheduler.setThreadNamePrefix("Spring-Task-T");
         return  taskScheduler;
     }
-    @Scheduled(cron = "0/5 * * ? * *")
+    @Scheduled(cron = "0 0/5 * ? * *")
     public void doTask(){
         logger.info("注解形式的定时任务1:{}",System.currentTimeMillis()/1000);
 //        String i =null;
 //        i.getBytes();//异常可以报出
     }
-    @Scheduled(cron = "0/5 * * ? * *")
+    @Scheduled(cron = "0 0/5 * ? * *")
     public void doTask2() throws InterruptedException {
         logger.info("注解形式的定时任务2:{}",System.currentTimeMillis()/1000);
         Thread.sleep(10_000);//下次任务执行需要等待上次任务执行结束
