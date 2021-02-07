@@ -6,6 +6,10 @@ package org.springboot.study.entity;
  * @description
  */
 public class UserJapan {
+
+    public UserJapan() {
+    }
+
     private String name;
 
     public String getName() {
@@ -13,6 +17,10 @@ public class UserJapan {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public UserJapan(String name) {
         this.name = name;
     }
 }
