@@ -1,5 +1,6 @@
 package org.springboot.study.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,16 +20,17 @@ import javax.servlet.ServletRequest;
  */
 @RestControllerAdvice
 @ConditionalOnWebApplication
+@Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NullPointerException.class)
     public String npe(NullPointerException e, ServletRequest servletRequest){
-
+        log.error("NPEException",e);
         return "NPE";
     }
     @ExceptionHandler(Exception.class)
     public String exception(Exception e, ServletRequest servletRequest){
-
+        log.error("Exception",e);
         return "NPE";
     }
     @Override

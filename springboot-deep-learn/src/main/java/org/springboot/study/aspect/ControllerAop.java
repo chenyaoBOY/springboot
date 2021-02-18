@@ -24,6 +24,6 @@ public class ControllerAop {
     public void after(JoinPoint point){
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         Object[] args = point.getArgs();
-        System.out.println("controller入参:method="+methodSignature.getMethod().getName()+" param="+JSON.toJSONString(args));
+//        System.out.println("controller入参:method="+methodSignature.getMethod().getName()+" param="+JSON.toJSONString(args));
     }
 }
